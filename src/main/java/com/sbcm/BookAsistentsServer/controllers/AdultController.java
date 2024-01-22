@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
  * encuentran las solicitudes de los métodos CRUD, pues esto ayuda a poder encontrar los datos de los registros
  * **/
 @RestController
-@RequestMapping("sbcm/registrolibrerias/adults")
+@RequestMapping("sbcm/registrolibrerias/adults") //Prueba de GitHub
 public class AdultController {
     //Este es utilizado para poder acceder a los registros en la base de datos "bookAsistents"
     AdultRepository adultRepository;
