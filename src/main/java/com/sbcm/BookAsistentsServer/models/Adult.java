@@ -23,18 +23,8 @@ public class Adult {
     private  String escolaridad;
    @Column(name = "discapacidad")
     private String discapacidad;
-   @Column(name = "id_Kidsregister")
-    private int id_KidsRegister;
    @Column(name = "ocupacion")
     private String ocupacion;
-
-    public int getId_KidsRegister() {
-        return id_KidsRegister;
-    }
-
-    public void setId_KidsRegister(int id_KidsRegister) {
-        this.id_KidsRegister = id_KidsRegister;
-    }
 
     public int getEdad() {
         return edad;
@@ -66,14 +56,6 @@ public class Adult {
 
     public void setDiscapacidad(String discapacidad) {
         this.discapacidad = discapacidad;
-    }
-
-    public int getIdKidsRegister() {
-        return id_KidsRegister;
-    }
-
-    public void setIdKidsRegister(int idKidsRegister) {
-        this.id_KidsRegister = idKidsRegister;
     }
 
     public String getOcupacion() {
