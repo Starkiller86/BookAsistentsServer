@@ -25,6 +25,10 @@ public class Adult {
     private String discapacidad;
    @Column(name = "ocupacion")
     private String ocupacion;
+   @Column(name  ="nvisitas")
+   private int nVisitas;
+   @Column(name ="tipodevisitante")
+   private String tipoDeVisitante;
 
     public int getEdad() {
         return edad;
@@ -72,5 +76,21 @@ public class Adult {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getnVisitas() {
+        return nVisitas;
+    }
+
+    public void setnVisitas(int nVisitas) {
+        this.nVisitas = nVisitas;
+    }
+
+    public String getTipoDeVisitante() {
+        return tipoDeVisitante;
+    }
+
+    public void setTipoDeVisitante(String tipoDeVisitante) {
+        this.tipoDeVisitante = tipoDeVisitante;
     }
 }

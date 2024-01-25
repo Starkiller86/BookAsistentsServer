@@ -3,6 +3,8 @@ package com.sbcm.BookAsistentsServer.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CollectionId;
+
 /**En esta parte lo que se hará será definir los datos que se tendrán en los registros y de
  * igual manera en esta parte se van a mapear la tabla de los registros ("kidsregister") de la base de datos,
  * esta se define como una entidad y cada una de las variables tiene que tener persistencia en la base de datos
@@ -26,6 +28,27 @@ public class Kid {
     private String discapacidad;
     @Column(name = "ocupacion")
     private String ocupacion;
+    @Column(name = "nvisitas")
+    private int nVisitas;
+    @Column(name = "tipodevisitante")
+    private String tipoDeVisitante;
+
+    public int getnVisitas() {
+        return nVisitas;
+    }
+
+    public void setnVisitas(int nVisitas) {
+        this.nVisitas = nVisitas;
+    }
+
+    public String getTipoDeVisitante() {
+        return tipoDeVisitante;
+    }
+
+    public void setTipoDeVisitante(String tipoDeVisitante) {
+        this.tipoDeVisitante = tipoDeVisitante;
+    }
+
     public int getId() {
         return id;
     }
