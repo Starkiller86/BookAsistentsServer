@@ -65,8 +65,9 @@ public class AdultController {
 
     @PutMapping
     public void putAdult(@RequestBody Adult adult){
-    if (!adultRepository.existsById(adult.getId()))
-        throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
+        if (!adultRepository.existsById(adult.getId()))
+            throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
+        adultRepository.save(adult);
     }
 
     /***

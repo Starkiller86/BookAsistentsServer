@@ -69,6 +69,7 @@ public class KidController {
     public void putKid(@RequestBody Kid kid){
         if (!kidRepository.existsById(kid.getId()))
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
+        kidRepository.save(kid);
     }
 
     /***
