@@ -80,4 +80,9 @@ public class AdultController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro el dato");
     adultRepository.deleteById(id);
     }
+
+    @GetMapping("/search/{nombre}")
+    public Iterable<Adult> findAdultByCompleteName(@PathVariable String nombre){
+        return adultRepository.findByNombreCompleto(nombre);
+    }
 }
