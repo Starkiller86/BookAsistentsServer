@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**El controlador Rest es un componente importante para poder hacer los metodos que se encuentran en el CRUD, esto
  * mediante el uso de las solicitudes de HTTP en la aplicación, pues mediante con esto y las Urls es posible realizar estos
  * métodos.
@@ -83,6 +88,26 @@ public class AdultController {
 
     @GetMapping("/search/{nombre}")
     public Iterable<Adult> findAdultByCompleteName(@PathVariable String nombre){
-        return adultRepository.findByNombreCompleto(nombre);
+        System.out.println(nombre);
+        String[] parts = nombre.split(" ");
+        List<String> partsList = new ArrayList<>();
+        Collections.addAll(partsList, parts);
+        String complete = nombre.replace(" ", "% %");
+
+        List<Adult> best = adultRepository.findByNombreCompleto(complete);
+        List<Adult> list = new ArrayList<>(best);
+        for (int i = 0; i<parts.length; i++){
+            if (!partsList.isEmpty() && partsList.size()>1){
+                partsList.remove(partsList.size()-1);
+                String replace = String.join("% %", partsList);
+                List<Adult> replaceList = adultRepository.findByNombreCompleto(replace);
+                list.addAll(replaceList);
+            }
+        }
+        for (Adult a: list
+             ) {
+            System.out.println(a.getNombre() + " " + a.getApellido());
+        }
+        return list;
     }
 }
