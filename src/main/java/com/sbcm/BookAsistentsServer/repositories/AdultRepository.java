@@ -13,7 +13,7 @@ import java.util.List;
  * **/
 public interface AdultRepository extends CrudRepository<Adult, Integer> {
 
-    @Query(value = "SELECT * FROM registroaduls A WHERE LOWER(CONCAT(A.nombre, ' ', A.apellido)) LIKE LOWER('%:nombreCompleto%')", nativeQuery = true)
+    @Query(value = "SELECT * FROM registroaduls A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%',:nombreCompleto,'%')))", nativeQuery = true)
     List<Adult> findByNombreCompleto(@Param("nombreCompleto") String nombreCompleto);
 
 

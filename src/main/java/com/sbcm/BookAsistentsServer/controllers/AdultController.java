@@ -7,9 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.print.attribute.HashPrintJobAttributeSet;
+import java.util.*;
 
 /**El controlador Rest es un componente importante para poder hacer los metodos que se encuentran en el CRUD, esto
  * mediante el uso de las solicitudes de HTTP en la aplicación, pues mediante con esto y las Urls es posible realizar estos
@@ -90,24 +89,20 @@ public class AdultController {
     public Iterable<Adult> findAdultByCompleteName(@PathVariable String nombre){
         System.out.println(nombre);
         String[] parts = nombre.split(" ");
-        List<String> partsList = new ArrayList<>();
-        Collections.addAll(partsList, parts);
+        List<String> partsList = Arrays.asList(parts);
         String complete = nombre.replace(" ", "% %");
+        System.out.println(complete);
+        Set<Adult> setAdult = new LinkedHashSet<>();
+        for (int i = 1; i<parts.length; i++){
+            String replace = String.join("% %", partsList.subList(0, partsList.size()-i));
+            setAdult.addAll(adultRepository.findByNombreCompleto(replace));
+        }
+        for (int i = parts.length-1; i>0; i--){
+            String replace = String.join("% %",partsList.subList(partsList.size()-i, partsList.size()-1));
+            setAdult.addAll(adultRepository.findByNombreCompleto(replace));
+        }
+        setAdult.addAll(adultRepository.findByNombreCompleto(complete));
 
-        List<Adult> best = adultRepository.findByNombreCompleto(complete);
-        List<Adult> list = new ArrayList<>(best);
-        for (int i = 0; i<parts.length; i++){
-            if (!partsList.isEmpty() && partsList.size()>1){
-                partsList.remove(partsList.size()-1);
-                String replace = String.join("% %", partsList);
-                List<Adult> replaceList = adultRepository.findByNombreCompleto(replace);
-                list.addAll(replaceList);
-            }
-        }
-        for (Adult a: list
-             ) {
-            System.out.println(a.getNombre() + " " + a.getApellido());
-        }
-        return list;
+        return new ArrayList<>(setAdult);
     }
 }
