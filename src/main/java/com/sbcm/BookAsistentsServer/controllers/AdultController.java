@@ -85,24 +85,33 @@ public class AdultController {
     adultRepository.deleteById(id);
     }
 
+    /**
+     * De la misma manera tenemos un nuevo endpoint que recibirá como variable de ruta (valor en el url) el nombre completo del usuario y devolverá un JSONArray con los resultados
+     * @param nombre nombre completo del usuario a buscar
+     * @return JSON Array con las coincidencias
+     */
     @GetMapping("/search/{nombre}")
     public Iterable<Adult> findAdultByCompleteName(@PathVariable String nombre){
+        //Este codigo tiene su propia logica pero no hace falta verla de momento
         System.out.println(nombre);
         String[] parts = nombre.split(" ");
         List<String> partsList = Arrays.asList(parts);
         String complete = nombre.replace(" ", "% %");
         System.out.println(complete);
         Set<Adult> setAdult = new LinkedHashSet<>();
+        //Se busca palabra por palabra empezando a quitar los apeidos asegurando que no se haya escrito mal
         for (int i = 1; i<parts.length; i++){
             String replace = String.join("% %", partsList.subList(0, partsList.size()-i));
             setAdult.addAll(adultRepository.findByNombreCompleto(replace));
         }
+        //Si no funciona, entonces vamos quitando los nombres hasta terminar con los apeidos
         for (int i = parts.length-1; i>0; i--){
             String replace = String.join("% %",partsList.subList(partsList.size()-i, partsList.size()-1));
             setAdult.addAll(adultRepository.findByNombreCompleto(replace));
         }
+        //Y al inicio de la lista colocamos la mejor coincidencia
         setAdult.addAll(adultRepository.findByNombreCompleto(complete));
-
+        //retornamos la lista de todas las coincidencias
         return new ArrayList<>(setAdult);
     }
 }
