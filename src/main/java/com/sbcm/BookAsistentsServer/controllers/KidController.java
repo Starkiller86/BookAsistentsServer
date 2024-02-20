@@ -60,7 +60,8 @@ public class KidController {
 
     @PostMapping
     public  void  postKid(@RequestBody Kid kid){
-        kid.setId(kidRepository.findLasId()+1);
+        kid.setId(kidRepository.findLasId()+2);
+        kid.setnVisitas(1);
         kidRepository.save(kid);
     }
 
@@ -73,6 +74,7 @@ public class KidController {
     public void putKid(@RequestBody Kid kid){
         if (!kidRepository.existsById(kid.getId()))
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
+        kid.setnVisitas(kid.getnVisitas()+1);
         kidRepository.save(kid);
     }
 

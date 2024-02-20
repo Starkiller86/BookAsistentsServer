@@ -13,10 +13,10 @@ import java.util.List;
  * **/
 
 public interface KidRepository extends CrudRepository<Kid, Integer> {
-    @Query(value = "SELECT * FROM kidregister A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%', :nombreCompleto, '%')))", nativeQuery = true)
+    @Query(value = "SELECT * FROM kidsregister A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%', :nombreCompleto, '%')))", nativeQuery = true)
     List<Kid> findByNombreCompleto(@Param("nombreCompleto") String nombreCompleto);
 
-    @Query(value = "SELECT MAX(ID) FROM kidregister", nativeQuery = true)
+    @Query(value = "SELECT MAX(ID) FROM kidsregister", nativeQuery = true)
     int findLasId();
 
 }

@@ -17,7 +17,7 @@ public interface AdultRepository extends CrudRepository<Adult, Integer> {
     @Query(value = "SELECT * FROM registroaduls A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%',:nombreCompleto,'%')))", nativeQuery = true)
     List<Adult> findByNombreCompleto(@Param("nombreCompleto") String nombreCompleto);
 
-    @Query(value = "SELECT MAX(ID) FROM registroaduls", nativeQuery = true)
+    @Query(value = "SELECT MAX(r.id) FROM registroaduls r", nativeQuery = true)
     int findLasId();
 
 }

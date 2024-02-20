@@ -61,6 +61,7 @@ public class AdultController {
     public  void  postAdult(@RequestBody Adult adult){
         //Como tal aquí va a colocar el ultimo id registrado y le va a sumar dos, así de simple. la logica real se va a ver en el registro en la base de datos
         adult.setId(adultRepository.findLasId()+2);
+        adult.setnVisitas(1);
         adultRepository.save(adult);
     }
 
