@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.*;
+
 /**El controlador Rest es un importante para poder crear los métodos que se encuentran en el CRUD esto
  * haciendo uso de las solicitudes HTTP en la aplicación, ya que, con ayuda de esto y el uso de las Urls es
  * posible realizar estos métodos CRUD.
@@ -57,6 +60,7 @@ public class KidController {
 
     @PostMapping
     public  void  postKid(@RequestBody Kid kid){
+        kid.setId(kidRepository.findLasId()+1);
         kidRepository.save(kid);
     }
 
@@ -81,5 +85,24 @@ public class KidController {
         if (!kidRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro el dato");
        kidRepository.deleteById(id);
+    }
+    @GetMapping("/search/{nombre}")
+    public Iterable<Kid>findKidbyCompleteName(@PathVariable String nombre) {
+        System.out.println(nombre);
+        String[] parts = nombre.split("");
+        List<String> partsList = Arrays.asList(parts);
+        String complete = nombre.replace("", "% %");
+        System.out.println(complete);
+        Set<Kid> setKid = new LinkedHashSet<>();
+        for (int i = 1; i < parts.length; i++) {
+            String replace = String.join("% %", partsList.subList(partsList.size() - i, partsList.size() - 1));
+            setKid.addAll(kidRepository.findByNombreCompleto(replace));
+        }
+        for (int i = parts.length - 1; i > 0; i--) {
+            String replace = String.join("% %", partsList.subList(partsList.size() - i, partsList.size() - 1));
+            setKid.addAll(kidRepository.findByNombreCompleto(complete));
+        }
+        setKid.addAll(kidRepository.findByNombreCompleto(complete));
+        return new ArrayList<>(setKid);
     }
 }

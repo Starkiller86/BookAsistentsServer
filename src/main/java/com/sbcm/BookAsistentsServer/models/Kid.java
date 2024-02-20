@@ -15,7 +15,6 @@ import org.hibernate.annotations.CollectionId;
 @Setter
 public class Kid {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "nombre")
