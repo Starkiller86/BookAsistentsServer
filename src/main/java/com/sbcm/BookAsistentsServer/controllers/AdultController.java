@@ -74,6 +74,7 @@ public class AdultController {
     public void putAdult(@RequestBody Adult adult){
         if (!adultRepository.existsById(adult.getId()))
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
+        adult.setnVisitas(adult.getnVisitas()+1);
         adultRepository.save(adult);
     }
 
