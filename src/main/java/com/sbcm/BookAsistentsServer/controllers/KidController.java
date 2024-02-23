@@ -60,7 +60,7 @@ public class KidController {
 
     @PostMapping
     public  void  postKid(@RequestBody Kid kid){
-        kid.setId(kidRepository.findLasId()+2);
+        kid.setId(kidRepository.findLasId()+1);
         kid.setnVisitas(1);
         kidRepository.save(kid);
     }
