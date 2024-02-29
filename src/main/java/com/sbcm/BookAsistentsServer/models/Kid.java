@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CollectionId;
 
+import java.util.Date;
+
 /**En esta parte lo que se hará será definir los datos que se tendrán en los registros y de
  * igual manera en esta parte se van a mapear la tabla de los registros ("kidsregister") de la base de datos,
  * esta se define como una entidad y cada una de las variables tiene que tener persistencia en la base de datos
@@ -21,8 +23,9 @@ public class Kid {
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
-    @Column(name = "edad")
-    private int edad;
+    @Column(name = "Fecha de Nacimiento")
+    @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
     @Column(name = "genero")
     private String genero;
     @Column(name = "escolaridad")
@@ -35,6 +38,7 @@ public class Kid {
     private int nVisitas;
     @Column(name = "tipodevisitante")
     private String tipoDeVisitante;
+
 
     public String getNombre() {
         return nombre;
@@ -76,12 +80,12 @@ public class Kid {
         this.id = id;
     }
 
-    public int getEdad() {
-        return edad;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getGenero() {
@@ -115,5 +119,6 @@ public class Kid {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
+
 
 }

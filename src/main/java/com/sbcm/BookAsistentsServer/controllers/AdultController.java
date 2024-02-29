@@ -70,11 +70,15 @@ public class AdultController {
      * @param adult y los datos los cuales se actualizarán en la base de datos
      */
 
-    @PutMapping
-    public void putAdult(@RequestBody Adult adult){
+    @PutMapping("/mark")
+    public void putAssistanceAdult(@RequestBody Adult adult){
         if (!adultRepository.existsById(adult.getId()))
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro en el datos");
         adult.setnVisitas(adult.getnVisitas()+1);
+        adultRepository.save(adult);
+    }
+    @PutMapping
+    public void putAdult(@RequestBody Adult adult){
         adultRepository.save(adult);
     }
 

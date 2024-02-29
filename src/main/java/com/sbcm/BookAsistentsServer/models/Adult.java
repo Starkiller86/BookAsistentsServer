@@ -2,6 +2,9 @@ package com.sbcm.BookAsistentsServer.models;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
+
 /** En esta parte se van a definir los datos que se tendrán en cada uno de los registros
  * al igual en esta parte se van a mapear la tabla de los registros de adultos ("registroaduls") de la base de datos
  * se define como una entidad y cada una de las variables tiene que tener persistencia en la base de datos
@@ -18,8 +21,9 @@ public class Adult {
    private String nombre;
    @Column(name = "apellido")
    private  String apellido;
-   @Column(name = "edad")
-    private int edad;
+   @Column(name = "Fecha de Nacimiento")
+   @Temporal(TemporalType.DATE)
+    private Date fechaNacimiento;
    @Column(name = "genero")
     private String genero;
    @Column(name = "escolaridad")
@@ -32,6 +36,7 @@ public class Adult {
    private int nVisitas;
    @Column(name ="tipodevisitante")
    private String tipoDeVisitante;
+
 
     public String getNombre() {
         return nombre;
@@ -49,12 +54,12 @@ public class Adult {
         this.apellido = apellido;
     }
 
-    public int getEdad() {
-        return edad;
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getGenero() {
@@ -112,4 +117,6 @@ public class Adult {
     public void setTipoDeVisitante(String tipoDeVisitante) {
         this.tipoDeVisitante = tipoDeVisitante;
     }
+
+
 }
