@@ -14,7 +14,7 @@ import java.util.List;
 public interface AdultRepository extends CrudRepository<Adult, Integer> {
 
     //A diferencia del repositorio de Kid este contiene una consulta SQL que nos arroja todos los adultos que cumplan con el formato del nombre
-    @Query(value = "SELECT * FROM registroaduls A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%',:nombreCompleto,'%')))", nativeQuery = true)
+    @Query(value = "FROM Adult A WHERE (LOWER(CONCAT(A.nombre, ' ', A.apellido))) LIKE (LOWER(CONCAT('%',:nombreCompleto,'%')))")
     List<Adult> findByNombreCompleto(@Param("nombreCompleto") String nombreCompleto);
 
     @Query(value = "SELECT MAX(r.id) FROM registroaduls r", nativeQuery = true)

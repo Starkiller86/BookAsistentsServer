@@ -81,7 +81,7 @@ public class AdultController {
     public void putAdult(@RequestBody Adult adult){
         adultRepository.save(adult);
     }
-
+    
     /***
      * Esto tienen como función eliminar un registro especificado por su id en la base de datos
      * @param id es la variable que se utilizara para poder eliminar el registro
