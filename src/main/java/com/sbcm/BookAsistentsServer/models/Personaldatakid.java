@@ -24,7 +24,7 @@ public class Personaldatakid {
     @Column(name = "numeropersonal")
     private String numeropersonal;
 
-    @Column(name = "numeroemergia")
-    private String numeroemergia;
+    @Column(name = "numeroemergencia")
+    private String numeroemergencia;
 
 }
