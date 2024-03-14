@@ -27,8 +27,10 @@ public class AdultPersonalController {
         return personalRepository.findById(id).orElse(null);
     }
     @PostMapping
-    public void postPersonalData(@RequestBody Personaldataadult personal){
+    public int postPersonalData(@RequestBody Personaldataadult personal){
         personalRepository.save(personal);
+        return personalRepository.findByAdultId(personal.getIdAdulto().getId()).getId();
+
     }
     @PutMapping
     public void putPersonalData(@RequestBody Personaldataadult personal){
