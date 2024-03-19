@@ -38,7 +38,10 @@ public class AdultController {
      */
     @GetMapping
     public Iterable<Adult>getAduls(){
-    return adultRepository.findAll();
+
+        List<Adult> list = (List<Adult>) adultRepository.findAll();
+        System.out.println(list.get(list.size()-1).getFechaNacimiento().toString());
+        return adultRepository.findAll();
     }
 
     /***
@@ -61,6 +64,7 @@ public class AdultController {
     public  int  postAdult(@RequestBody Adult adult){
         //Como tal aquí va a colocar el ultimo id registrado y le va a sumar dos, así de simple. la logica real se va a ver en el registro en la base de datos
         int lastId = adultRepository.findLasId()+2;
+        System.out.println(adult.getFechaNacimiento().toString());
         adult.setId(lastId);// de aquí podemos sacar el ultimo más bien su id y retornarlo
         adult.setnVisitas(1);
         adultRepository.save(adult);

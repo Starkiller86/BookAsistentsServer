@@ -14,17 +14,18 @@ public class Personaldataadult {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_adulto")
+    @OneToOne
+    @JoinColumn(name = "id_adulto", referencedColumnName ="id")
     private Adult idAdulto;
-
-    @Column(name = "domicilio")
-    private String domicilio;
 
     @Column(name = "numeropersonal")
     private String numeropersonal;
 
     @Column(name = "numeroemergencia")
     private String numeroemergencia;
+
+    @Column(name = "domicilio")
+    private String domicilio;
+
 
 }
