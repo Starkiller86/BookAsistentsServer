@@ -25,9 +25,10 @@ public class KidPersonalController {
     }
 
     @PostMapping
-    public void postPersonalData(@RequestBody Personaldatakid personal){
+    public int postPersonalData(@RequestBody Personaldatakid personal){
         personalRepository.save(personal);
-
+        int idPersonal = personal.getIdKid().getId();
+        return personalRepository.findByKidId(idPersonal);
     }
     @PutMapping
     public void putPersonalData(@RequestBody Personaldatakid personal){
