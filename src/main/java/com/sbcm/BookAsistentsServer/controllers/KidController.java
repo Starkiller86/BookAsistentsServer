@@ -1,8 +1,6 @@
 package com.sbcm.BookAsistentsServer.controllers;
 
-import com.sbcm.BookAsistentsServer.models.Adult;
 import com.sbcm.BookAsistentsServer.models.Kid;
-import com.sbcm.BookAsistentsServer.repositories.AdultRepository;
 import com.sbcm.BookAsistentsServer.repositories.KidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,13 +54,16 @@ public class KidController {
     /***
      * Lo que realiza esta función es poder crear registros en la base de datos
      * @param kid es el objeto que se usara con todos los datos
+     * @return
      */
 
     @PostMapping
-    public  void  postKid(@RequestBody Kid kid){
-        kid.setId(kidRepository.findLasId()+1);
+    public int postKid(@RequestBody Kid kid){
+        int lastId = kidRepository.findLasId()+2;
+        kid.setId(lastId);
         kid.setnVisitas(1);
         kidRepository.save(kid);
+        return lastId;
     }
 
     /***
