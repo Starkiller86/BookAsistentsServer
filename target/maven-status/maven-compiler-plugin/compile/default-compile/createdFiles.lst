@@ -1,0 +1,16 @@
+com\sbcm\BookAsistentsServer\Services\FindUsersServiceKid.class
+com\sbcm\BookAsistentsServer\models\Adult.class
+com\sbcm\BookAsistentsServer\repositories\KidRepository.class
+com\sbcm\BookAsistentsServer\BookAsistentsServerApplication.class
+com\sbcm\BookAsistentsServer\models\Personaldatakid.class
+com\sbcm\BookAsistentsServer\controllers\AdultPersonalController.class
+com\sbcm\BookAsistentsServer\repositories\AdultPersonalRepository.class
+com\sbcm\BookAsistentsServer\models\Kid.class
+com\sbcm\BookAsistentsServer\repositories\KidPersonalRepository.class
+com\sbcm\BookAsistentsServer\controllers\AdultController.class
+com\sbcm\BookAsistentsServer\controllers\KidPersonalController.class
+com\sbcm\BookAsistentsServer\models\Personaldataadult.class
+com\sbcm\BookAsistentsServer\repositories\AdultRepository.class
+com\sbcm\BookAsistentsServer\controllers\KidController.class
+com\sbcm\BookAsistentsServer\Services\FindUsersServiceAdult.class
+com\sbcm\BookAsistentsServer\Services\FindUsersServiceKid$FindUserServiceKid.class
