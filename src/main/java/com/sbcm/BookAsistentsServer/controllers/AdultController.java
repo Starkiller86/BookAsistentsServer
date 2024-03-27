@@ -40,7 +40,7 @@ public class AdultController {
     public Iterable<Adult>getAduls(){
 
         List<Adult> list = (List<Adult>) adultRepository.findAll();
-        System.out.println(list.get(list.size()-1).getFechaNacimiento().toString());
+
         return adultRepository.findAll();
     }
 
