@@ -14,6 +14,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Adult {
+
    @Id
    @Column(name = "id")
     private int id;
