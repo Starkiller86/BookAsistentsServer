@@ -1,6 +1,8 @@
 package com.sbcm.BookAsistentsServer.controllers;
 
 import com.sbcm.BookAsistentsServer.models.Adult;
+import com.sbcm.BookAsistentsServer.models.Personaldataadult;
+import com.sbcm.BookAsistentsServer.repositories.AdultPersonalRepository;
 import com.sbcm.BookAsistentsServer.repositories.AdultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,12 @@ import java.util.*;
 public class AdultController {
     //Este es utilizado para poder acceder a los registros en la base de datos "bookAsistents"
     AdultRepository adultRepository;
+    AdultPersonalRepository personalRepo;
+
+    @Autowired
+    public void setPersonalRepo(AdultPersonalRepository personalRepo) {
+        this.personalRepo = personalRepo;
+    }
 
     /***
      * En este se establecen las inyecciones de dependencias a adultRepository
@@ -96,6 +104,14 @@ public class AdultController {
     public void deleteAdultById(@PathVariable int id){
     if (!adultRepository.existsById(id))
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro el dato");
+
+    System.out.println(personalRepo.existByIdAdult(id));
+    if (personalRepo.existByIdAdult(id)>0){
+        int idPersonal =  personalRepo.findByAdultId(id);
+        personalRepo.deleteById(idPersonal);
+
+    }
+
     adultRepository.deleteById(id);
     }
 

@@ -20,4 +20,5 @@ public interface AdultRepository extends CrudRepository<Adult, Integer> {
     @Query(value = "SELECT MAX(r.id) FROM registroaduls r", nativeQuery = true)
     int findLasId();
 
+
 }
