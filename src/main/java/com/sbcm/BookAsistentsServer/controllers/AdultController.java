@@ -102,13 +102,15 @@ public class AdultController {
      */
     @DeleteMapping("/{id}")
     public void deleteAdultById(@PathVariable int id){
+        //Primero verificamos si existe el usuario, sino arrojará una excepción
     if (!adultRepository.existsById(id))
         throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro el dato");
-
+    //si existe vamos a verificar mediante el repositorio de personaldata se pone ahi el exception profe???, pues no es necesario, en caso de que no tenga datos personales solo se salta a eleiminar directamente el registro
     System.out.println(personalRepo.existByIdAdult(id));
     if (personalRepo.existByIdAdult(id)>0){
-        int idPersonal =  personalRepo.findByAdultId(id);
-        personalRepo.deleteById(idPersonal);
+        //Perso si los tiene va a eliminar el personal data que tenga el id del adulto relacionadp
+        //lo podemos hacer en una linea
+        personalRepo.deleteById(personalRepo.findByAdultId(id));
 
     }
 

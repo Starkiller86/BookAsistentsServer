@@ -1,6 +1,7 @@
 package com.sbcm.BookAsistentsServer.controllers;
 
 import com.sbcm.BookAsistentsServer.models.Kid;
+import com.sbcm.BookAsistentsServer.repositories.KidPersonalRepository;
 import com.sbcm.BookAsistentsServer.repositories.KidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,13 @@ import java.util.*;
 public class KidController {
     //Este es utilizado para poder tener acceso a los registros de la base de datos "TableKids"
     KidRepository kidRepository;
+
+    KidPersonalRepository personalkidRepo;
+
+    @Autowired
+    public void setPersonalkidRepo(KidPersonalRepository personalkidRepo) {
+        this.personalkidRepo = personalkidRepo;
+    }
 
     /***
      * La función de este es establecer la inyección de dependencias Spring a kidRepository
@@ -87,8 +95,13 @@ public class KidController {
     public void deleteKidById(@PathVariable int id){
         if (!kidRepository.existsById(id))
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"no se encontro el dato");
-       kidRepository.deleteById(id);
+        System.out.println(personalkidRepo.existsById(id));
+        if (personalkidRepo.existByIdKid(id)>0){
+            personalkidRepo.deleteById(personalkidRepo.findByKidId(id));
+        }
+        kidRepository.deleteById(id);
     }
+
     @GetMapping("/search/{nombre}")
     public Iterable<Kid>findKidbyCompleteName(@PathVariable String nombre) {
         System.out.println(nombre);
